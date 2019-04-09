@@ -2,6 +2,7 @@ package xxtea
 
 import (
 	. "github.com/smartystreets/goconvey/convey"
+	go_xxtea "github.com/xxtea/xxtea-go/xxtea"
 	"testing"
 )
 
@@ -49,11 +50,29 @@ func BenchmarkEncrypt(b *testing.B) {
 	}
 }
 
+func BenchmarkXXTeaGoEncrypt(b *testing.B) {
+	data := []byte("gvhaerutq vnp3h 7-q324bv571 5adhfadddf")
+	key := []byte("1231241adfsdfh3456sadfasdf")
+
+	for i := 0; i < b.N; i++ {
+		go_xxtea.Encrypt(data, key)
+	}
+}
+
 func BenchmarkDecrypt(b *testing.B) {
 	encryptedData := []byte{256 - 88, 256 - 91, 256 - 58, 9, 256 - 109, 256 - 54, 117, 61, 22, 111, 29, 51, 20, 115, 256 - 5, 256 - 50, 256 - 34, 124, 256 - 85, 10, 45, 256 - 85, 52, 256 - 29, 256 - 125, 256 - 113, 52, 107, 93, 256 - 68, 87, 256 - 58, 113, 123, 122, 86, 63, 114, 109, 256 - 46, 256 - 117, 256 - 116, 256 - 106, 11}
 	key := []byte("1231241adfsdfh3456sadfasdf")
 
 	for i := 0; i < b.N; i++ {
 		Decrypt(encryptedData, key)
+	}
+}
+
+func BenchmarkXXTeaGoDecrypt(b *testing.B) {
+	encryptedData := []byte{256 - 88, 256 - 91, 256 - 58, 9, 256 - 109, 256 - 54, 117, 61, 22, 111, 29, 51, 20, 115, 256 - 5, 256 - 50, 256 - 34, 124, 256 - 85, 10, 45, 256 - 85, 52, 256 - 29, 256 - 125, 256 - 113, 52, 107, 93, 256 - 68, 87, 256 - 58, 113, 123, 122, 86, 63, 114, 109, 256 - 46, 256 - 117, 256 - 116, 256 - 106, 11}
+	key := []byte("1231241adfsdfh3456sadfasdf")
+
+	for i := 0; i < b.N; i++ {
+		go_xxtea.Decrypt(encryptedData, key)
 	}
 }
