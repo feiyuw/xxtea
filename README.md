@@ -97,10 +97,10 @@ ok  	github.com/feiyuw/xxtea	0.006s	coverage: 93.8% of statements
 goos: darwin
 goarch: amd64
 pkg: github.com/feiyuw/xxtea
-BenchmarkEncrypt-8          	 3000000	       572 ns/op	     192 B/op	       4 allocs/op
-BenchmarkXXTeaGoEncrypt-8   	 2000000	       663 ns/op	     128 B/op	       3 allocs/op
-BenchmarkDecrypt-8          	 3000000	       531 ns/op	     112 B/op	       3 allocs/op
-BenchmarkXXTeaGoDecrypt-8   	 3000000	       583 ns/op	     128 B/op	       3 allocs/op
+BenchmarkEncrypt-8               3000000               531 ns/op             112 B/op          3 allocs/op
+BenchmarkXXTeaGoEncrypt-8        2000000               650 ns/op             128 B/op          3 allocs/op
+BenchmarkDecrypt-8               3000000               545 ns/op             112 B/op          3 allocs/op
+BenchmarkXXTeaGoDecrypt-8        3000000               581 ns/op             128 B/op          3 allocs/op
 PASS
 ok  	github.com/feiyuw/xxtea	8.806s
 ```
