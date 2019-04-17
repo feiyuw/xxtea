@@ -85,9 +85,8 @@ func asByteArray(data []uint32, includeLength bool) ([]byte, error) {
 func asUint32Array(data []byte, includeLength bool) []uint32 {
 	var uint32Arr []uint32
 
-	size := len(data) / 4
-	remain := len(data) % 4
-	if remain != 0 {
+	size := uint32(len(data) / 4)
+	if len(data)&3 != 0 {
 		size++
 	}
 
@@ -98,15 +97,26 @@ func asUint32Array(data []byte, includeLength bool) []uint32 {
 		uint32Arr = make([]uint32, size)
 	}
 
-	if remain != 0 { // pad data with \x00
-		data = append(data, make([]byte, remain)...)
-	}
-
-	for idx := 0; idx < size; idx++ {
-		uint32Arr[idx] = binary.LittleEndian.Uint32(data[idx*4 : (idx+1)*4])
+	for idx := uint32(0); idx < size; idx++ {
+		uint32Arr[idx] = toUint32(data[idx*4:])
 	}
 
 	return uint32Arr
+}
+
+func toUint32(b []byte) uint32 {
+	switch len(b) {
+	case 0:
+		return uint32(0)
+	case 1:
+		return uint32(b[0])
+	case 2:
+		return uint32(b[0]) | uint32(b[1])<<8
+	case 3:
+		return uint32(b[0]) | uint32(b[1])<<8 | uint32(b[2])<<16
+	default:
+		return uint32(b[0]) | uint32(b[1])<<8 | uint32(b[2])<<16 | uint32(b[3])<<24
+	}
 }
 
 func btea(v []uint32, n int, key []uint32) []uint32 {
