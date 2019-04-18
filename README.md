@@ -1,5 +1,4 @@
-# xxtea
-xxtea encrypt/decrypt library for golang
+Another xxtea encrypt/decrypt library for golang, compared to [xxtea/xxtea-go](https://github.com/xxtea/xxtea-go), it has better performance and lower memory usage.
 
 [xxtea](https://en.wikipedia.org/wiki/XXTEA) is a fast and secure encryption algorithm. This package is its golang implementation.
 
@@ -7,11 +6,6 @@ xxtea encrypt/decrypt library for golang
 
 ```sh
 go get github.com/feiyuw/xxtea
-```
-
-or if use govendor
-```sh
-govendor fetch github.com/feiyuw/xxtea
 ```
 
 ## Usage
